@@ -1,0 +1,86 @@
+<div style="display: flex; justify-content: center;">
+    <div style="width: 25%; margin-top: 2cm;" *ngIf="showDiv==1">
+        <form>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Mejl adresa:</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    placeholder="sara@gmail.com" [(ngModel)]="this.email" name="this.email">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Lozinka:</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Lozinka"
+                    [(ngModel)]="this.password" name="this.password">
+            </div>
+            <div class="text-danger" style="padding-inline-start: 1cm;padding-bottom: 15px;" *ngIf="this.errorMessage">
+                {{this.errorMessage}} </div>
+
+            <button type="submit" class="btn btn-danger crvenoo" (click)=" login()">Login</button>
+            <a class="text-danger" style="padding-inline-start: 1cm;margin-top: 10px;" href="bioskop/2"> ili se
+                registrujte</a>
+        </form>
+    </div>
+    <div style="width: 25%; margin-top: 2cm;" *ngIf="showDiv==2">
+        <form>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email adresa:</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    placeholder="sara@gmail.com" [(ngModel)]="this.email" name="this.email">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Lozinka:</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Lozinka"
+                    [(ngModel)]="this.password" name="this.password">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword2">Ponovite lozinku:</label>
+                <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Lozinka:"
+                    [(ngModel)]="this.password2" name="this.password2">
+            </div>
+            <div class="text-danger" style="padding-inline-start: 1cm;padding-bottom: 15px;" *ngIf="this.errorMessage">
+                {{this.errorMessage}} </div>
+            <button type="submit" class="btn btn-danger crvenoo" (click)="register()">Registracija</button>
+            <a class="text-danger" style="padding-inline-start: 1cm;margin-top: 10px;" href="bioskop/1"> ili se
+                ulogujte</a>
+        </form>
+    </div>
+    <div style="width: 25%; margin-top: 2cm; text-align: center;" *ngIf="showDiv==3">
+        <form>
+            <h4> Zdravo korisniče:</h4><br>
+            <h1> {{this.returnName()}}</h1>
+            <br><br>
+            <!-- <div> -->
+            <button class="text-danger" (click)="logout()"
+                style="padding: 10px; border-radius: 30px;border-color: darkred; 
+                border-style: solid; background-color: transparent;">
+                Odjavi se</button>
+            <!-- </div> -->
+        </form> 
+    </div>
+    <div style="display: block; justify-content: center; width: 35%;padding-top: 10px;">
+        <div *ngFor="let mov of movies"
+            style=" margin-top: 10px; width: 70%; margin-left: 15%; border-radius: 1cm ; border-style: solid;">
+            <a href="movie/{{mov.id}}" style="display: flex; width: 100%;  ">
+                <div style="width: 60%; padding: 1cm;">
+                    <label><b>{{mov.title}}</b></label><br>
+                    <label>{{mov.releaseDate|date}} </label>
+
+                </div>
+                <div>
+                    <img src="{{mov.posterString}}" style="width: 3cm; border-radius:1cm ;margin: 10px;">
+                </div>
+            </a>
+        </div>
+    </div>
+    <div style="width: 30%;padding-top: 15px;">
+        <div class="row justify-content-center" style="text-align: center;">
+            <div class="col-auto">
+                <form>
+                    <div leaflet [leafletOptions]="optionsLocations" [leafletLayers]="this.markers"
+                        style="height: 10cm;width: 10cm; border-radius: 1cm;">
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

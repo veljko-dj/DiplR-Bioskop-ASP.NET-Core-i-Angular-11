@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="bioskop" style="color: darkgray;">Bioskop Sara</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Žanrovi
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="genreNew" *ngIf="this.adminService.onlyForAdmins()">Dodaj žanr</a>
+          <a class="dropdown-item" href="genreList">Spisak Žanrova</a>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Bioskopi
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="locationNew" *ngIf="this.adminService.onlyForAdmins()">Dodaj bioskop</a>
+          <a class="dropdown-item" href="locationList">Spisak bioskopa</a>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Glumci
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="actorNew" *ngIf="this.adminService.onlyForAdmins()">Dodaj glumca</a>
+          <a class="dropdown-item" href="actorList">Spisak glumaca</a>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="movieNew" *ngIf="this.adminService.onlyForAdmins()">Dodaj film</a>
+      </li>      <li class="nav-item">
+        <a class="nav-link"   *ngIf="this.adminService.onlyForAdmins()">Prodaj ulaznice</a>
+      </li>
+    </ul>
+  </div>
+  <div style="display: flex;">
+    <input class="form-control mr-sm-2" type="search" placeholder="Pretraga filmova..." aria-label="Search"
+      style="border-radius: 20px;" [(ngModel)]="this.searchTitle">
+    <button class="btn btn-outline-success my-2 my-sm-0" style="color: red; border-color:darkred; border-radius: 20px;"
+      type="submit" (click)="search()">Pretraga</button>
+  </div>
+</nav>

@@ -1,0 +1,23 @@
+button:hover {
+    color: lightgray !important; 
+    background-color: darkred !important;
+}
+button{
+    color: red; border-color:darkred; border-radius: 20px;
+}
+
+select{
+    color: red; border-color:darkred; border-radius: 20px;
+    background-color: transparent; height: 35px;  margin-top: 5px; margin-right: 20px;
+
+}
+
+option{
+    background-color: black;
+    color: red; border-color:darkred;
+}
+
+option:hover{
+    color: black;
+    background-color: red;
+}

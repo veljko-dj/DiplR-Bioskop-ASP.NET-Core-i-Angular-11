@@ -1,0 +1,59 @@
+<div style=" justify-content: center; text-align: center; width: 95%; margin-left: 1cm;" *ngIf="actor">
+    <div class="col-auto" style="display: flex; width: 70%; height: 10cm; margin-left:  10%;">
+        <div class="form-group" style="display: flex;width: 50%;">
+            <div style="display: block; padding-right: 1cm; margin-right: 90px;margin-top: 2cm;">
+                <div style="display: block;">
+                    <h6 style="padding-top: 10px;">Ime i prezime glumca:</h6>
+                    <h3><b style="font-size: larger;">{{actor.name}}</b> </h3>
+                </div>
+                <div style="display: block;">
+                    <h6 style="padding-top: 10px;"> Datum rodjenja: </h6>
+                    <h3><b>{{actor.dateOfBirth|date}}</b> </h3>
+                </div>
+            </div>
+        </div>
+        <div style="width: 30%;">
+            <img src="{{this.actor.pictureString}}" style="border-radius: 10px; width: 100%;;margin-left: 40px; "
+                alt="Responsive image">
+        </div>
+        <div style="display: block;width: 30%; margin-left: 2cm;">
+            <p>
+                <a class="btn btn-danger btn-lg" data-toggle="collapse" href="#multiCollapseExample1" role="button"
+                    aria-expanded="false" aria-controls="multiCollapseExample1"
+                    style="width: 60%;margin-left: 2cm;"><b>Biografija</b></a>
+            </p>
+            <div class="row" style="width: 150%;">
+                <div class="col">
+                    <div class="collapse multi-collapse" id="multiCollapseExample1">
+                        <div class="card card-body" style="color: darkred;">
+                            {{this.actor.bio}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center" *ngIf="!actor">
+    <div class="col-auto">
+        <img src="https://img.pikbest.com/58pic/35/39/61/62K58PICb88i68HEwVnm5_PIC2018.gif!w340">
+    </div>
+</div>
+
+
+<div style="display: flex;flex-wrap: wrap; justify-content: center; padding-top: 10px;">
+    <div *ngFor="let mov of movies"
+        style=" margin-top: 10px; width: 30%; margin:10px; border-radius: 1cm ; border-style: solid;">
+        <a href="movie/{{mov.id}}" style="display: flex; width: 100%;  ">
+            <div style="width: 60%; padding: 1cm;">
+                <label><b>{{mov.title}}</b></label><br>
+                <label>{{mov.releaseDate|date}} </label>
+
+            </div>
+            <div>
+                <img src="{{mov.posterString}}" style="width: 3cm; border-radius:1cm ;margin: 10px;">
+            </div>
+        </a>
+    </div>
+</div>

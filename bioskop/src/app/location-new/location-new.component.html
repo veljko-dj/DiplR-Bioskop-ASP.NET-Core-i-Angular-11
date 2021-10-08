@@ -1,0 +1,28 @@
+<div class="row justify-content-center" style="text-align: center;">
+    <div class="col-auto">
+        <form>
+            <div class="form-group" >
+                <label for="GenreName">Naziv bioskopa</label>
+                <div style="justify-content: center;width: 100%;">
+                    <input type="text" class="form-control" id="GenreName" name="genreName"
+                        [(ngModel)]="this.locationName" placeholder="Bioskop 2..." style="text-align: center;width: 30%;margin-left: 35%;">
+                </div>
+                <input type="number" class="form-control"
+                    placeholder="Broj mesta..." style="text-align: center;width: 30%;margin-left: 35%; margin-top: 10px;">
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="this.errorMessage!=''">
+                {{this.errorMessage}}
+            </div>
+
+            <div leaflet [leafletOptions]="options" [leafletLayers]="this.locations" (leafletClick)="click($event)"
+                style="height: 10cm;width: 30cm; border-radius: 1cm;">
+            </div>
+
+
+            <div>
+                <button type="button" style="margin-top: 20px;" class="btn btn-secondary" (click)="addLocation()">Dodaj bioskop</button>
+            </div>
+        </form>
+
+    </div>
+</div> 

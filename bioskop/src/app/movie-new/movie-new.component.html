@@ -1,0 +1,84 @@
+<div style="display: flex; justify-content: center; align-items: center; ">
+  <div class="col-auto" style="width: 12cm;">
+    <div class="form-group" style="justify-content: center;">
+
+      <label for="movieTitle">Naziv filma</label>
+      <input type="text" class="form-control" id="movieTitle" name="movieTitle" [(ngModel)]="this.movieTitle"
+        placeholder='Kad porastem bicu kengur..' style="margin-bottom: 10px;">
+      Datum izlaska:
+      <input type="date" value="2017-06-01" name="movieDate" [(ngModel)]="this.movieDate"
+        style="margin-bottom: 20px;margin-top: 10px; margin-left: 10px;">
+      <!-- <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput> -->
+
+      <div class="custom-file" style="margin-bottom: 10px;">
+        <input type="file" class="custom-file-input" (change)="onFileChanged($event)" #fileInput>
+        <label class="custom-file-label" for="validatedCustomFile">{{this.nameOfPictureToDisplay}}</label>
+      </div>
+      <label>Link ka snimku o filmu</label>
+      <input type="url" class="form-control" name="movieTrailer" [(ngModel)]="this.movieTrailer"
+        placeholder='youtube.com' style="margin-bottom: 10px;">
+      <div class="form-group">
+        <label for="exampleFormControlTextarea1">Sazetak</label>
+        <textarea name="movieSummary" [(ngModel)]="this.movieSummary" class="form-control"
+          id="exampleFormControlTextarea1" rows="2" placeholder="Ukratko.."> </textarea>
+      </div>
+
+      <div style="margin-bottom: 10px;">
+        <ng-multiselect-dropdown [placeholder]="'Odaberi zanr'" [settings]="dropdownSettingsGenres"
+          [data]="dropdownGenres" [(ngModel)]="selectedGenres" (onSelectAll)="onSelectAll($event)"
+          style="background-color: black;">
+          <!-- (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"-->
+        </ng-multiselect-dropdown>
+      </div>
+
+      <ng-multiselect-dropdown style="padding-top: 1cm;" [placeholder]="'Odaberi lokacije'"
+        [settings]="dropdownSettingsLoc" [data]="dropdownLoc" [(ngModel)]="selectedLoc">
+      </ng-multiselect-dropdown>
+    </div>
+
+    <label>Glumci:</label>
+    <div class="container mt-3">
+      <input (keyup)="updateActorListKeyUp()" (click)="this.showActors=true" class="form-control" id="myInput"
+        type="text" placeholder="Ime glumca" [(ngModel)]="this.filterWord">
+      <br>
+      <div *ngIf="showActors">
+        <ul class="list-group" id="myList" value="selectedActors">
+          <li class="list-group-item" *ngFor="let actor of filtredActors" (click)="addActor(actor)">
+            <img src={{actor.pictureString}} style="height: 70px; border-radius: 10px; ">
+            <a style="padding-left: 1cm; color: black;">{{actor.name}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="display: flex; justify-content: center; ">
+  <div style="width: 12cm;">
+    <label>Uloge:</label>
+    <div style="background-color:rgba(0,0,0,0.6); border-radius: 10px;">
+      <li class="list-group-item" *ngFor="let actor of selectedActors"
+        style="background-color: transparent;margin: 10px; border-radius: 20px; list-style-type: square;">
+        <span style="display: flex; justify-content: center;">
+          <label style="width: 40%; padding-top: 5px; font-size: larger;">{{actor.name}}</label>
+          <input style="width: 25%; height: 38px;" type="text" class="form-control" [(ngModel)]="actor.bio"
+            placeholder="Uloga">
+          <button style="width: 20%; height: 40px;margin-left: 10%;" type="button" class="btn btn-secondary"
+            (click)="submitButton.disabled = true" #submitButton> Sačuvaj</button>
+        </span>
+      </li>
+    </div>
+  </div>
+</div>
+
+
+
+<div style="display: flex; justify-content: center; align-items: center; ">
+  <div style="width: 12cm; justify-content: center; text-align: center;">
+    <div style="justify-content: center;">
+      <button type="button" class="btn btn-secondary" (click)="addMovie()">Dodaj film</button>
+    </div>
+  </div>
+  <div class="alert alert-danger" style="justify-content: center;" role="alert" *ngIf="this.errorMessage!=''">
+    {{this.errorMessage}}
+  </div>
+</div>

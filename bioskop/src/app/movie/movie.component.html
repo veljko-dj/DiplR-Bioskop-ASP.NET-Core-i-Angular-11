@@ -1,0 +1,163 @@
+<div *ngIf="!this.movie">
+    <div class="col-auto">
+        <img src="https://img.pikbest.com/58pic/35/39/61/62K58PICb88i68HEwVnm5_PIC2018.gif!w340"
+            style="width: 3cm;height: 3cm;">
+    </div>
+</div>
+
+<div *ngIf="this.movie" style="width:80%; margin-left: 10%;">
+
+    <h2>{{this.movie.title}}</h2>
+    {{this.movie.releaseDate|date}}
+
+
+    <div *ngIf="this.movie" style="display: flex;">
+        <div style="width: 50%;">
+            <div style="text-align: center;">
+                <app-video idSnimka="{{this.movie.trailer}}" style="width: 10cm;"></app-video>
+            </div>
+            <br>
+            <div style="display: flex; justify-content: center;">
+                <div *ngFor="let g of this.movieGenres"
+                    style="padding-right: 20px; padding-left: 20px; border-radius: 10px;border-style: solid;">{{g.name}}
+                </div>
+            </div>
+            <label style="font-size: 20px;">Kratak opis</label> <br>
+            <label style="padding-left: 20px;"> {{this.movie.summary}}</label>
+            <br>
+            <label style="font-size: 20px;">Glumci: </label> <br>
+            <div style="padding-left: 20px;" *ngFor="let act of movieActors">
+                <img src="{{act.pictureString}}" style="width: 1cm; border-radius: 1cm;">
+                <label style="padding-left: 10px;"> <a href="actor/{{act.id}}">{{act.name}}</a> kao
+                    {{act.character}}</label>
+            </div>
+            <div style="color:black"> 
+                <div leaflet [leafletOptions]="optionsForMap" [leafletLayers]="this.markers"
+                    style="height: 10cm;width: 15cm; border-radius: 1cm; margin-top: 10px;">
+                </div>
+            </div>
+        </div>
+        <div>
+            <div style="display: flex;" (click)="praznaMetoda()">
+                <img src="{{this.movie.posterString}}" style="height: 300px; padding-left: 3cm;">
+                <ngx-star-rating style="width: 2cm; margin-top: -30px;" [id]="'this.userRate'"
+                    [(ngModel)]="this.userRate" [disabled]="false" (click)="rateMovie()"></ngx-star-rating>
+            </div>
+            <div style="display: block; padding-inline-start: 2cm; margin-top: 1cm;">
+
+                <h3>Prosečna ocena filma: <b>{{this.movie.rating}}</b></h3>
+                <br>
+
+                <div style="display: flex;">
+                    <div style="display: block;">
+                        <div class="dropdown" *ngIf="this.adminService.onlyForAuthorized()">
+                            <select aria-labelledby="dropdownMenuButton" class="aaa" [(ngModel)]="datesFromReleaseDay">
+                                <option class="dropdown-item bbb" value="0">
+                                    {{ this.addDays(movie.releaseDate,0) |date}}</option>
+                                <option class="dropdown-item bbb" value="1">
+                                    {{ this.addDays(movie.releaseDate,1) |date}}</option>
+                                <option class="dropdown-item bbb" value="2">
+                                    {{ this.addDays(movie.releaseDate,2) |date}}</option>
+                                <option class="dropdown-item bbb" value="3">
+                                    {{ this.addDays(movie.releaseDate,3) |date}}</option>
+                                <option class="dropdown-item bbb" value="4">
+                                    {{ this.addDays(movie.releaseDate,4) |date}}</option>
+                            </select>
+                        </div>
+
+                        <div class="dropdown" *ngIf="this.adminService.onlyForAuthorized()">
+                            <select aria-labelledby="dropdownMenuButton" class="aaa"
+                                [(ngModel)]="locationForReservation">
+                                <option class="dropdown-item bbb" value="{{loc.name}}" style="color: grey;"
+                                    *ngFor="let loc of movieLocs">
+                                    {{loc.name}}</option>
+                            </select>
+                        </div>
+                        <div class="dropdown" *ngIf="this.adminService.onlyForAuthorized()">
+                            <select aria-labelledby="dropdownMenuButton" class="aaa"
+                                [(ngModel)]="numOfTicketsReservation">
+                                <option class="dropdown-item bbb" value="0" disabled selected="true">Broj karata...
+                                </option>
+                                <option class="dropdown-item bbb" value="1">1</option>
+                                <option class="dropdown-item bbb" value="2">2</option>
+                                <option class="dropdown-item bbb" value="3">3</option>
+                            </select>
+                        </div>
+
+
+                    </div>
+                    <button class="btn btn-outline-success my-2 my-sm-0 zeleno" type="submit" (click)="reserveTickets()"
+                        *ngIf="this.reservationMessage=='' &&  returnReserveButtonToShow &&  
+                        this.adminService.onlyForAuthorized()" style="border-radius: 1cm;width: 8CM;">
+                        Rezerviši karte za ovaj film ({{this.numOfTicketsReservation}})</button>
+                    <div style="color: lightgreen;padding-top: 20px;">
+                        {{this.reservationMessage}}
+                    </div>
+                </div>
+                <hr>
+                <div style="display: flex;">
+                    <div style="display: block;">
+                        <div class="dropdown" *ngIf="this.adminService.onlyForAuthorized()">
+                            <select aria-labelledby="dropdownMenuButton" class="kup"
+                                [(ngModel)]="datesFromReleaseDayBUY">
+                                <option class="dropdown-item kup" value="0">
+                                    {{ this.addDays(movie.releaseDate,0) |date}}</option>
+                                <option class="dropdown-item kup" value="1">
+                                    {{ this.addDays(movie.releaseDate,1) |date}}</option>
+                                <option class="dropdown-item kup" value="2">
+                                    {{ this.addDays(movie.releaseDate,2) |date}}</option>
+                                <option class="dropdown-item kup" value="3">
+                                    {{ this.addDays(movie.releaseDate,3) |date}}</option>
+                                <option class="dropdown-item kup" value="4">
+                                    {{ this.addDays(movie.releaseDate,4) |date}}</option>
+                            </select>
+                        </div>
+
+                        <div class="dropdown" *ngIf="this.adminService.onlyForAuthorized()">
+                            <select aria-labelledby="dropdownMenuButton" class="kup" [(ngModel)]="locationForBuying">
+                                <option class="dropdown-item kup" value="{{loc.name}}" *ngFor="let loc of movieLocs">
+                                    {{loc.name}}</option>
+                            </select>
+                        </div>
+
+
+                        <div class="dropdown" *ngIf="this.adminService.onlyForAuthorized()">
+                            <select aria-labelledby="dropdownMenuButton" class="kup" [(ngModel)]="numOfTicketsBuying">
+                                <option class="dropdown-item kup" value="0" disabled selected="true">Broj karata...
+                                </option>
+                                <option class="dropdown-item kup" value="1">1</option>
+                                <option class="dropdown-item kup" value="2">2</option>
+                                <option class="dropdown-item kup" value="3">3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="display: grid; width: 100%;" *ngIf="this.adminService.onlyForAuthorized() && this.buyingMessage=='' 
+                    && returnReserveButtonToShow">
+                        <button (click)="makePayment(5*numOfTicketsBuying)"
+                            style="border-radius: 1cm; font-size: larger;width: 8cm; " class="kupovina">Kupite karte
+                            ${{5*numOfTicketsBuying}}<br>
+                            (Visa-Mastercard)</button>
+                    </div>
+                    <div style="color: lightgreen;padding-top: 20px;">
+                        {{this.buyingMessage}}
+                    </div>
+                </div>
+
+                <div class="text-danger" style="font-size: x-large;" *ngIf="!this.adminService.onlyForAuthorized()">
+                    Morate se ulogovati da biste rezervisani ili kupili karte!
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<div style="display: grid; justify-content: center; margin-bottom: 2cm; margin-top: 1cm;"
+    *ngIf="this.adminService.onlyForAdmins()">
+    <button class="btn btn-outline-success my-2 my-sm-0 crvenoDugme" type="submit" (click)="deleteMovie()">Ukloni
+        film</button>
+</div>

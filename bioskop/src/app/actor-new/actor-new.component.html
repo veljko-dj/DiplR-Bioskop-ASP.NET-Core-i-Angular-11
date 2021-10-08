@@ -1,0 +1,38 @@
+<div class="row justify-content-center" style="text-align: center;">
+    <div class="col-auto">
+        <form>
+            <div class="form-group" style="width: 80%;margin-left: 10%;">
+                <label for="GenreName">Ime i prezime glumca</label>
+                <input type="text" class="form-control" id="GenreName" name="actorName" [(ngModel)]="this.actorName"
+                    placeholder="Veljko Đorović" style="margin-bottom: 10px;">
+                Datum rodjenja:
+                <input type="date" value="2017-06-01" name="actorDate" [(ngModel)]="this.actorDate"
+                    style="margin-bottom: 10px;">
+                <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput> 
+                <div class="custom-file" style="margin-bottom: 10px;">
+                    <input style="margin-top: 10px;margin-bottom: 10px;" type="file" class="custom-file-input" (change)="onFileChanged($event)" #fileInput>
+                    <label class="custom-file-label" for="validatedCustomFile">{{this.nameOfPictureToDisplay}}</label>
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Biografija</label>
+                    <textarea name="actorBio" [(ngModel)]="this.actorBio" class="form-control"
+                        id="exampleFormControlTextarea1" rows="4" placeholder="Ukratko o glumcu..."></textarea>
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="this.errorMessage!=''">
+                    {{this.errorMessage}}
+                </div>
+                <div>
+                    <button type="button" class="btn btn-secondary" (click)="addGenre()">Dodaj glumca</button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+<!-- <div style="padding: 15px; width: 15 cm; text-align: center;"> -->
+<!-- Kako napraviti da ovo bude kutijica-->
+<!-- </div> -->
+
+ 

@@ -1,0 +1,10 @@
+<div style=" display: flex;flex-wrap: wrap; margin: 2cm;">
+    <a *ngFor="let actor of actors" style="margin: 10px; border-radius: 20px; background:transparent; 
+    border-color: white; background-color: transparent; border-style: solid;
+        width:18%;" href="actor/{{actor.id}}" >
+        <img src="{{actor.pictureString}}" style="width: 100%;padding: 10px; border-radius: 20px;">
+        <span style="display: grid; justify-content: center;">
+            <label style="margin-top: 5px; ">{{actor.name}}</label>
+        </span>  
+    </a>
+</div>

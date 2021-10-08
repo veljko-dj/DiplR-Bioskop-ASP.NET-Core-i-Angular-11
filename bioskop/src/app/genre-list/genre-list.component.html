@@ -1,0 +1,27 @@
+<div class="row justify-content-center" *ngIf="(this.genres.length!=0)">
+    <div class="col-auto">
+        <table class="table" style="width: 10cm ; text-align: center; ">
+            <thead>
+                <tr>
+                    <th scope="col" style="font-size: larger;">Naziv</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of genres">
+                    <td ><a href="searchMovie/g/{{item.id}}">{{item.name}}</a></td>
+                    <td style="text-align: left;width: 3cm;" *ngIf="this.adminService.onlyForAdmins()"><button type="button" class="btn btn-danger btn-sm"
+                            (click)="removeGenre(item)">Ukloni</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="row justify-content-center" *ngIf="(this.genres.length==0)">
+    <div class="col-auto">
+        <img src="https://img.pikbest.com/58pic/35/39/61/62K58PICb88i68HEwVnm5_PIC2018.gif!w340"
+            style="width: 3cm;height: 3cm;">
+    </div>
+</div>
+
+

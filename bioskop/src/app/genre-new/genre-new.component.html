@@ -1,0 +1,27 @@
+
+<div class="row justify-content-center" style="text-align: center;">
+    <div class="col-auto"> 
+        <form>
+            <div class="form-group">
+                <label for="GenreName">Naziv zanra</label>
+                <input type="text" class="form-control" id="GenreName" name="genreName" [(ngModel)]="this.genreName"
+                    placeholder="Akcija">
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="this.errorMessage!=''">
+                {{this.errorMessage}}
+            </div>
+            <div>
+                <button type="button" class="btn btn-secondary" (click)="addGenre()">Dodaj zanr</button>
+            </div>
+        </form>
+
+    </div>
+  </div>
+
+<!-- <div style="padding: 15px; width: 15 cm; text-align: center;"> -->
+    <!-- Kako napraviti da ovo bude kutijica-->
+<!-- </div> -->
+
+
+<hr> 
+{{this.genreName}}
